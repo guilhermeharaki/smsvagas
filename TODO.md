@@ -1,0 +1,21 @@
+# TODO
+
+- [x] Entrada e normalização dos códigos usados
+  - O aplicativo deve permitir que o usuário forneça a lista de códigos já usados.
+  - Deve validar e normalizar os códigos informados para o padrão `SMS` seguido de quatro dígitos.
+- [x] Consulta e estado dos 10.000 códigos
+  - Gerar e exibir os 10.000 códigos no intervalo `SMS0000` a `SMS9999`.
+  - Destacar códigos livres em verde e códigos usados em vermelho.
+  - Destacar inicialmente em vermelho os códigos existentes na lista da consulta fornecida.
+  - Exibir contadores com o total de códigos, livres e usados.
+- [x] Navegação da grade
+  - Oferecer busca direta por um código específico.
+  - Permitir filtrar a visualização entre todos, livres e usados.
+  - Organizar os códigos em uma grade responsiva com navegação eficiente para grandes volumes.
+- [x] Prioridade visual e posicionamento da fonte
+  - Destacar “Visão geral · Lista carregada” e o mapa como item principal do aplicativo.
+  - Posicionar a fonte de dados no final do app, após o mapa e a lista de códigos usados.
+- [x] Abrir o aplicativo com a visualização “Livres” selecionada por padrão.
+- [x] Lista completa no final do aplicativo
+  - Exibir no final do app a lista dos códigos usados carregados, em ordem crescente.
+  - Manter a lista sincronizada quando os dados forem atualizados e permitir copiá-la.

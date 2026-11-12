@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f6f1" />
+    <meta name="description" content="Consulte os códigos SMS de 0000 a 9999 e identifique visualmente os livres e os já usados." />
+    <title>Mapa de códigos SMS</title>
+    <link rel="icon" href="mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Mapa SMS — início">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="brand-name">mapa<span>sms</span></span>
+      </a>
+      <div class="topbar-note"><span class="live-dot"></span> FERRAMENTA DE CONSULTA LOCAL</div>
+    </header>
+
+    <main class="shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> CONTROLE DE DISPONIBILIDADE</p>
+          <h1 id="page-title">Cada código,<br /><em>em seu lugar.</em></h1>
+          <p class="hero-subtitle">Consulte de <strong>SMS0000</strong> a <strong>SMS9999</strong>. O que está livre fica verde; o que já foi usado, vermelho.</p>
+        </div>
+        <div class="hero-stamp" aria-label="10 mil códigos no intervalo">
+          <div class="stamp-ring"><span>SMS</span><strong>10<span>k</span></strong><small>CÓDIGOS</small></div>
+          <span class="stamp-caption">0000 <b>—</b> 9999</span>
+        </div>
+        <div class="hero-grid-pattern" aria-hidden="true"></div>
+      </section>
+
+      <section class="summary" aria-label="Resumo dos códigos">
+        <article class="stat-card stat-total">
+          <div class="stat-top"><span class="stat-label">INTERVALO</span><span class="stat-icon icon-total" aria-hidden="true">#</span></div>
+          <div class="stat-value" id="total-count">10.000</div>
+          <div class="stat-caption">códigos possíveis</div>
+        </article>
+        <article class="stat-card stat-free">
+          <div class="stat-top"><span class="stat-label">LIVRES</span><span class="stat-icon icon-free" aria-hidden="true">✓</span></div>
+          <div class="stat-value" id="free-count">10.000</div>
+          <div class="stat-caption">disponíveis na lista</div>
+        </article>
+        <article class="stat-card stat-used">
+          <div class="stat-top"><span class="stat-label">USADOS</span><span class="stat-icon icon-used" aria-hidden="true">×</span></div>
+          <div class="stat-value" id="used-count">0</div>
+          <div class="stat-caption">encontrados na lista</div>
+        </article>
+      </section>
+
+      <div class="workspace">
+        <section class="grid-panel" aria-labelledby="grid-title">
+          <div class="grid-heading">
+            <div class="panel-heading grid-title-group">
+              <div class="heading-mark grid-mark" aria-hidden="true"><span>02</span></div>
+              <div><p class="section-kicker">VISÃO GERAL</p><h2 id="grid-title">Mapa de códigos</h2></div>
+            </div>
+            <div class="legend" aria-label="Legenda">
+              <span><i class="legend-dot free-dot"></i> Livre</span>
+              <span><i class="legend-dot used-dot"></i> Usado</span>
+            </div>
+          </div>
+
+          <div class="grid-controls">
+            <div class="search-wrap">
+              <span class="search-icon" aria-hidden="true"></span>
+              <label class="visually-hidden" for="search-code">Buscar código</label>
+              <input id="search-code" type="search" placeholder="Buscar código… ex. SMS0420" autocomplete="off" />
+              <kbd>/</kbd>
+            </div>
+            <div class="filter-tabs" role="group" aria-label="Filtrar códigos">
+              <button type="button" class="filter-tab" data-filter="all" aria-pressed="false">Todos</button>
+              <button type="button" class="filter-tab is-active" data-filter="free" aria-pressed="true">Livres</button>
+              <button type="button" class="filter-tab" data-filter="used" aria-pressed="false">Usados</button>
+            </div>
+          </div>
+
+          <div class="results-line"><span id="results-count">Exibindo 1–200 de 10.000 códigos</span><label class="page-size-control" for="page-size">Por página <select id="page-size" aria-label="Códigos por página"><option value="100">100</option><option value="200" selected>200</option><option value="500">500</option><option value="1000">1.000</option></select></label></div>
+          <div class="code-grid" id="code-grid" role="list" aria-label="Códigos SMS"></div>
+          <div class="empty-state" id="empty-state" hidden>Nenhum código corresponde à busca e ao filtro.</div>
+          <nav class="pagination" aria-label="Paginação">
+            <button id="prev-page" type="button" class="page-button" aria-label="Página anterior" disabled>← <span>Anterior</span></button>
+            <span id="page-indicator" class="page-indicator">Página 1 de 50</span>
+            <button id="next-page" type="button" class="page-button" aria-label="Próxima página"><span>Próxima</span> →</button>
+          </nav>
+          <div class="grid-footnote"><span class="footnote-rule"></span><span>Selecione um código para copiá-lo</span></div>
+        </section>
+      </div>
+      <section class="used-list-panel" aria-labelledby="used-list-title">
+        <div class="used-list-heading">
+          <div class="panel-heading">
+            <div class="heading-mark used-list-mark" aria-hidden="true"><span>03</span></div>
+            <div><p class="section-kicker">CONSULTA</p><h2 id="used-list-title">Lista de códigos usados</h2></div>
+          </div>
+          <button class="button-quiet copy-list-button" id="copy-used-list" type="button">Copiar lista</button>
+        </div>
+        <p class="used-list-intro">Códigos existentes na consulta, em ordem crescente. A lista acompanha os dados carregados no mapa.</p>
+        <label class="visually-hidden" for="used-code-list">Lista completa de códigos usados</label>
+        <textarea id="used-code-list" class="used-code-list" readonly wrap="off" spellcheck="false" aria-describedby="used-list-count"></textarea>
+        <div class="used-list-foot"><span id="used-list-count">0 códigos listados</span><span>Um código por linha</span></div>
+      </section>
+      <aside class="input-panel" aria-labelledby="input-title">
+        <div class="panel-heading">
+          <div class="heading-mark" aria-hidden="true"><span>01</span></div>
+          <div><p class="section-kicker">FONTE DOS DADOS</p><h2 id="input-title">Sua lista de usados</h2></div>
+        </div>
+        <p class="panel-intro">Cole os códigos ou carregue um arquivo para marcar os já ocupados.</p>
+
+        <label class="field-label" for="codes-input">CÓDIGOS UTILIZADOS</label>
+        <textarea id="codes-input" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Ex.: SMS0001, SMS0002&#10;SMS-0148&#10;sms 2050" aria-describedby="input-hint"></textarea>
+        <div class="field-hint" id="input-hint"><span class="hint-dot"></span>Aceita um código por linha ou separados por vírgula, espaço ou ponto e vírgula.</div>
+
+        <div class="file-row">
+          <label class="file-button" for="file-input"><span aria-hidden="true">↑</span> Importar .TXT ou .CSV</label>
+          <input id="file-input" type="file" accept=".txt,.csv,text/plain,text/csv" />
+          <span class="file-name" id="file-name">Nenhum arquivo</span>
+        </div>
+        <div class="form-actions">
+          <button class="button-primary" id="apply-list" type="button"><span aria-hidden="true">✓</span> Atualizar mapa</button>
+          <button class="button-quiet" id="clear-list" type="button">Limpar</button>
+        </div>
+
+        <div class="parse-message" id="parse-message" role="status" aria-live="polite">Nenhuma lista carregada. Importe ou cole uma lista atualizada para consultar a disponibilidade.</div>
+        <div class="privacy-note"><span class="lock-icon" aria-hidden="true">◆</span><span><strong>Seus dados ficam no navegador.</strong><br />A lista não é enviada para um servidor.</span></div>
+      </aside>
+      <footer class="footer"><span>MAPA SMS <b>·</b> INTERVALO 0000—9999</span><span>Organize. Consulte. Continue.</span></footer>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
